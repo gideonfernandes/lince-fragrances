@@ -1,13 +1,12 @@
 import React from 'react';
 
-import { Container, Logo, FormContainer } from './styles';
+import { Container, FormContainer } from './styles';
+import Logo from '../../components/Logo';
 
 const Login = () => {
   return (
     <Container>
-      <Logo>
-        <p>Lince <span>Fragrances</span></p>
-      </Logo>
+      <Logo />
       <FormContainer>
         <h1>
           Adquira os <strong>melhores</strong> perfumes importados, 
