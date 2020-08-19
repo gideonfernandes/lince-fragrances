@@ -68,6 +68,7 @@ export const FormContainer = styled.section`
     color: #fff;
     background: #AA6C39;
     cursor: pointer;
+    transition: background 0.2s ease-in;
   }
 
   button.btn:hover {

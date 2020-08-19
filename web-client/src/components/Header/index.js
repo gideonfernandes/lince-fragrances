@@ -6,7 +6,7 @@ import { Container, Cart } from './styles';
 
 import Logo from '../Logo';
 
-function Header() {
+const Header = () => {
   return (
     <Container>
       <Logo />
