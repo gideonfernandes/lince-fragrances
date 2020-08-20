@@ -1,0 +1,54 @@
+const Yup = require('yup');
+const Purchase = require('../models/Purchase');
+const User = require('../models/User');
+const Product = require('../models/Product');
+
+class PurchaseController {
+  async index(request, response) {
+    const purchases = await Purchase.findAll({
+      attributes: ['id', 'user_id', 'order', 'total'],
+      limit: 20,
+      include: [
+        {
+          model: User,
+          as: 'buyer',
+          attributes: ['id', 'name', 'last_name'],
+        },
+      ],
+    });
+
+    return response.json(purchases);
+  }
+
+  async store(request, response) {
+    const schema = Yup.object().shape({
+      user_id: Yup.number().required(),
+      total: Yup.number().required(),
+      order: Yup.string().required(),
+      order: Yup.array().of(
+        Yup.object().shape({
+          product_id: Yup.number().required(),
+			    amount: Yup.number().required(),
+			    subtotal: Yup.number().required(),
+        }),
+      ),
+    });
+
+    if (!(await schema.isValid(request.body))) {
+      return response.status(400).json({ error: 'Validation fails.' });
+    }
+    const {
+      user_id, order, total
+    } = request.body;
+
+    const purchase = await Purchase.create({
+      user_id,
+      order,
+      total,
+    });
+
+    return response.json(purchase);
+  }
+}
+
+module.exports = new PurchaseController();
