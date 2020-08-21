@@ -11,7 +11,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { ProductList } from './styles';
 
-const Home = ({ amount, addToCart }) => {
+const Home = ({ amount, addToCartRequest }) => {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
 
@@ -50,7 +50,7 @@ const Home = ({ amount, addToCart }) => {
 
               <button
                 type="button"
-                onClick={() => addToCart(product)}
+                onClick={() => addToCartRequest(product.id)}
               >
                 <div>
                   <MdAddShoppingCart size={16} color="#FFF" />{' '}
