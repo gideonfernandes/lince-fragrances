@@ -6,7 +6,7 @@ class ProductController {
     const products = await Product.findAll();
 
     return response.json(products);
-  }
+  };
 
   async store(request, response) {
     const schema = Yup.object().shape({
@@ -50,7 +50,23 @@ class ProductController {
       image: product.image,
       image_url: product.image_url,
     });
-  }
+  };
+
+  async show(request, response) {
+    const { product_id } = request.params;
+
+    const product = await Product.findOne({
+      where: { id: product_id },
+    });
+
+    if (!product) {
+      return response
+        .status(400)
+        .json({ error: 'Product is not found.' });
+    };
+
+    return response.json(product);
+  };
 }
 
 module.exports = new ProductController();
