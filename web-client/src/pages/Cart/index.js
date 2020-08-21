@@ -15,13 +15,13 @@ import Footer from '../../components/Footer';
 
 import { Container, ProductTable, Total } from './styles';
 
-const Cart = ({ cart, total, removeFromCart, updateAmount }) => {
+const Cart = ({ cart, total, removeFromCart, updateAmountRequest }) => {
   const decrementAmount = (product) => {
-    updateAmount(product.id, product.amount - 1);
+    updateAmountRequest(product.id, product.amount - 1);
   };
 
   const incrementAmount = (product) => {
-    updateAmount(product.id, product.amount + 1);
+    updateAmountRequest(product.id, product.amount + 1);
   };
   
   return (
