@@ -1,9 +1,13 @@
 const express = require('express');
+const cors = require('cors');
 const { resolve } = require('path');
 const routes = require('./routes');
 require('./database');
 
 const app = express();
+
+// Init cors setup middleware
+app.use(cors());
 
 // Init JSON middleware
 app.use(express.json());
