@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MdAddShoppingCart } from 'react-icons/md';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import MoonLoader from "react-spinners/MoonLoader";
 
 import api from '../../services/api';
 import * as CartActions from '../../store/modules/cart/actions';
@@ -9,7 +10,7 @@ import { formatPrice } from '../../utils/format';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { ProductList } from './styles';
+import { LoadContainer, ProductList } from './styles';
 
 const Home = ({ amount, addToCartRequest }) => {
   const [loading, setLoading] = useState(false);
@@ -35,11 +36,17 @@ const Home = ({ amount, addToCartRequest }) => {
   return (
     <>
       <Header />
-      <ProductList>
-        {loading ? (
-          <h1>Loading...</h1>
-        ) : (
-          products.map(product => (
+      {loading ? (
+        <LoadContainer>
+          <MoonLoader
+            size={150}
+            color={"#FFF"}
+            loading={loading}
+          />
+        </LoadContainer>
+      ) : (
+        <ProductList>
+          {products.map(product => (
             <li key={product.id}>
               <img
                 src={product.image_url}
@@ -53,16 +60,16 @@ const Home = ({ amount, addToCartRequest }) => {
                 onClick={() => addToCartRequest(product.id)}
               >
                 <div>
-                  <MdAddShoppingCart size={16} color="#FFF" />{' '}
+                  <MdAddShoppingCart size={16} color="#FFF" /> {' '}
                   {amount[product.id] || 0}
                 </div>
 
                 <span>Adicionar ao carrinho</span>
               </button>
             </li>
-          ))
-        )}
-      </ProductList>
+          ))};
+        </ProductList>
+      )}
       <Footer />
     </>
   );

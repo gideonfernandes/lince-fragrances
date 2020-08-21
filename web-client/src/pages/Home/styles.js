@@ -1,6 +1,15 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
 
+export const LoadContainer = styled.div`
+  width: 960px;
+  height: 300px;
+  margin: 3rem auto 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const ProductList = styled.ul`
   width: 100%;
   display: grid;

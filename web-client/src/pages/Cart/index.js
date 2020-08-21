@@ -11,7 +11,6 @@ import * as CartActions from '../../store/modules/cart/actions';
 import { formatPrice } from '../../utils/format';
 
 import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 
 import { Container, ProductTable, Total } from './styles';
 
@@ -93,7 +92,6 @@ const Cart = ({ cart, total, removeFromCart, updateAmountRequest }) => {
           </Total>
         </footer>
       </Container>
-      <Footer />
     </>
   );
 }

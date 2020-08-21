@@ -9,7 +9,7 @@ export const FooterComponent = styled.footer`
   padding: 2rem calc((100% - 960px) / 2);
   background: #151515;
   margin-top: 3rem;
-
+  
   p {
     color: white;
     font-size: 1.1rem;
