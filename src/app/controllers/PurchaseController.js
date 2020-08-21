@@ -1,13 +1,15 @@
 const Yup = require('yup');
 const Purchase = require('../models/Purchase');
 const User = require('../models/User');
-const Product = require('../models/Product');
 
 class PurchaseController {
   async index(request, response) {
     const purchases = await Purchase.findAll({
       attributes: ['id', 'user_id', 'order', 'total'],
       limit: 20,
+      order: [
+        ['id', 'DESC'],
+      ],
       include: [
         {
           model: User,

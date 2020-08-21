@@ -3,8 +3,9 @@ const databaseConfig = require('../config/database');
 const User = require('../app/models/User');
 const Product = require('../app/models/Product');
 const Purchase = require('../app/models/Purchase');
+const Stock = require('../app/models/Stock');
 
-const models = [User, Product, Purchase];
+const models = [User, Product, Purchase, Stock];
 
 class Database {
   constructor() {
