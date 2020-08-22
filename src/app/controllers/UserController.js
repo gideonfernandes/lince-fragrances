@@ -1,5 +1,8 @@
 const Yup = require('yup');
+const jwt = require('jsonwebtoken');
+
 const User = require('../models/User');
+const authConfig = require('../../config/auth');
 
 class UserController {
   async store(request, response) {
@@ -21,13 +24,8 @@ class UserController {
     const userExists = await User.findOne({ where: { email } });
 
     if (userExists) {
-      return response.json({
-        id: userExists.id,
-        name: userExists.name,
-        lastName: userExists.last_name,
-        email: userExists.email,
-      });
-    }
+      return response.status(400).json({ error: 'User already exists!' });
+    };
 
     const user = await User.create({
       name,
@@ -37,10 +35,14 @@ class UserController {
     });
 
     return response.json({
-      id: user.id,
-      name: user.name,
-      lastName: user.last_name,
-      email: user.email,
+      user: {
+        id: user.id,
+        name: user.name,
+        last_name: user.last_name,
+      },
+      token: jwt.sign({ id: user.id }, authConfig.secret, {
+        expiresIn: authConfig.expiresIn,
+      }),
     });
   }
 }

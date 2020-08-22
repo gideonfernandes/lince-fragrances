@@ -8,6 +8,10 @@ export const Container = styled.header`
   padding: 0 calc((100% - 960px) / 2);
   background-color: #151515;
   padding-bottom: 2.6rem;
+
+  svg {
+    cursor: pointer;
+  }
 `;
 
 export const Cart = styled(Link)`

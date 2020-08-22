@@ -5,4 +5,3 @@ const api = axios.create({
 });
 
 export default api;
-//process.env.MONGO_URL APP_URL

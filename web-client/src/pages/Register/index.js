@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -8,13 +8,16 @@ import * as AuthActions from '../../store/modules/auth/actions';
 import { Container, FormContainer } from './styles';
 import Logo from '../../components/Logo';
 
-const Login = ({ loadTokenRequest, history, isAuthenticated, loginRequest }) => {
+const Register = ({ loadTokenRequest, history, isAuthenticated, registerRequest }) => {
   const [formData, setFormData] = useState({
+    name: '',
+    lastName: '',
     email: '',
     password: '',
+    confirmPassword: '',
   });
 
-  const { email, password } = formData;
+  const { name, lastName, email, password, confirmPassword } = formData;
 
   useEffect(() => {
     if (localStorage.token && localStorage.token !== undefined) {
@@ -36,42 +39,74 @@ const Login = ({ loadTokenRequest, history, isAuthenticated, loginRequest }) => 
   const handleOnSubmit = (event) => {
     event.preventDefault();
 
-    if (email === '' || password === '') {
+    if (name === '' || lastName === '' || email === '' || password === '') {
       toast.error('Por favor, preencha todos os campos.');
+    } else if (password !== confirmPassword) {
+      toast.error('As senhas não correspondem.');
     } else {
-      loginRequest({
+      registerRequest({
+        name,
+        lastName,
         email,
         password,
       });
     };
-  }
+  };
 
+  // to-do get form's data and call registerRequest/loginRequest
   return (
     <Container>
       <Logo />
       <FormContainer>
         <h1>
-          Acesse sua conta e aproveite as <strong>melhores </strong>
-          promoções em perfumes importados, diversidade e
-          <strong> qualidade</strong> em um só lugar!
+          Adquira os <strong>melhores</strong> perfumes importados, 
+          fragâncias <strong>peculiares</strong> que encantam...
         </h1>
 
         <form onSubmit={handleOnSubmit}>
+          <label htmlFor="name">NOME *</label>
+          <input
+            type="text" 
+            name="name"
+            placeholder="Seu nome"
+            value={name}
+            onChange={handleOnChange}
+          />
+
+          <label htmlFor="lastName">SOBRENOME *</label>
+          <input
+            type="text" 
+            name="lastName"
+            placeholder="Seu sobrenome"
+            value={lastName}
+            onChange={handleOnChange}
+          />
+
           <label htmlFor="email">EMAIL *</label>
           <input
             type="email" 
             name="email"
-            placeholder="Seu email cadastrado"
+            placeholder="Seu melhor e-mail"
             value={email}
             onChange={handleOnChange}
           />
 
-          <label htmlFor="password">SENHA *</label>
+          <label htmlFor="email">SENHA *</label>
           <input
             type="password" 
             name="password"
-            placeholder="Sua senha"
+            placeholder="Sua nova senha"
             value={password}
+            onChange={handleOnChange}
+            minLength="7"
+          />
+
+          <label htmlFor="email">CONFIRMAR SENHA *</label>
+          <input
+            type="password" 
+            name="confirmPassword"
+            placeholder="Confirme sua senha"
+            value={confirmPassword}
             onChange={handleOnChange}
             minLength="7"
           />
@@ -80,11 +115,11 @@ const Login = ({ loadTokenRequest, history, isAuthenticated, loginRequest }) => 
             type="submit"
             className="btn"
           >
-            ACESSAR CONTA
+            FINALIZAR CADASTRO
           </button>
         </form>
-        <Link to="/register">
-          Não possui uma conta? <strong>Registre-se aqui</strong>
+        <Link to="/login">
+          Já possui uma conta? <strong>Faça login aqui</strong>
         </Link>
       </FormContainer>
     </Container>
@@ -98,4 +133,4 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(AuthActions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

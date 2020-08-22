@@ -6,6 +6,12 @@ import GlobalStyle from './styles/global';
 import Routes from './routes';
 import store from './store';
 
+import setAuthToken from './services/setAuthToken';
+
+if (localStorage.token && localStorage.token !== undefined) {
+  setAuthToken(localStorage.token);
+};
+
 function App() {
   return (
     <Provider store={store}>

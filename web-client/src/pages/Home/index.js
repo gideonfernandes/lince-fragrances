@@ -12,26 +12,34 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { LoadContainer, ProductList } from './styles';
 
-const Home = ({ amount, addToCartRequest }) => {
+const Home = ({ isAuthenticated, history, amount, addToCartRequest }) => {
+  useEffect(() => {
+    if (!isAuthenticated) {
+      history.push('/login');
+    };
+  }, [history, isAuthenticated]);
+  
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const loadProducts = async () => {
-      setLoading(true);
+    if (isAuthenticated) {
+      const loadProducts = async () => {
+        setLoading(true);
+  
+        const response = await api.get('/products');
+        const data = response.data.map(product => ({
+          ...product,
+          priceFormatted: formatPrice(product.price),
+        }));
+        setProducts(data);
+  
+        setLoading(false);
+      };
 
-      const response = await api.get('/products');
-      const data = response.data.map(product => ({
-        ...product,
-        priceFormatted: formatPrice(product.price),
-      }));
-      setProducts(data);
-
-      setLoading(false);
+      loadProducts();
     };
-
-    loadProducts();
-  },[]);
+  },[isAuthenticated]);
 
   return (
     <>
@@ -76,6 +84,7 @@ const Home = ({ amount, addToCartRequest }) => {
 };
 
 const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated,
   amount: state.cart.reduce((amount, product) => {
     amount[product.id] = product.amount;
     return amount;
