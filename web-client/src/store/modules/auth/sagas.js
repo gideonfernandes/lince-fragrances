@@ -6,7 +6,7 @@ import setAuthToken from '../../../services/setAuthToken';
 import { loadTokenSuccess, authSuccess } from './actions';
 
 function* loadTokenRequest() {
-  yield put(loadTokenSuccess());
+  yield put(loadTokenSuccess(localStorage.getItem('authenticateUserId')));
 };
 
 function* registerRequest({ userData }) {
@@ -23,9 +23,9 @@ function* registerRequest({ userData }) {
       config,
     );
 
-    const { token } = response.data;
+    const { token, user } = response.data;
     
-    yield put(authSuccess(token));
+    yield put(authSuccess(token, user.id));
     yield put(setAuthToken(localStorage.token));
   } catch (error) {
     if (error.response) {
@@ -56,9 +56,9 @@ function* loginRequest({ userData }) {
       config,
     );
 
-    const { token } = response.data;
+    const { token, user } = response.data;
     
-    yield put(authSuccess(token));
+    yield put(authSuccess(token, user.id));
     yield put(setAuthToken(localStorage.token));
   } catch (error) {
     if (error.response) {

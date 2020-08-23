@@ -9,7 +9,9 @@ import store from './store';
 import setAuthToken from './services/setAuthToken';
 
 if (localStorage.token && localStorage.token !== undefined) {
-  setAuthToken(localStorage.token);
+  if (localStorage.authenticateUserId !== undefined) {
+    setAuthToken(localStorage.token);
+  };    
 };
 
 function App() {

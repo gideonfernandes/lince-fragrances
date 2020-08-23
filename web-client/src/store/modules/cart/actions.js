@@ -34,3 +34,9 @@ export function updateAmountSuccess(productId, amount) {
     amount,
   };
 };
+
+export function resetCart() {
+  return {
+    type: '@cart/RESET',
+  };
+};

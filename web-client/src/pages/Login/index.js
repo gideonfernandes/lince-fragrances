@@ -18,7 +18,9 @@ const Login = ({ loadTokenRequest, history, isAuthenticated, loginRequest }) => 
 
   useEffect(() => {
     if (localStorage.token && localStorage.token !== undefined) {
-      loadTokenRequest();
+      if (localStorage.authenticateUserId !== undefined) {
+        loadTokenRequest();
+      };
     };
   // eslint-disable-next-line
   }, []);

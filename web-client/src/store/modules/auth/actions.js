@@ -4,9 +4,10 @@ export function loadTokenRequest() {
   };
 };
 
-export function loadTokenSuccess() {
+export function loadTokenSuccess(user) {
   return {
     type: '@auth/LOAD_TOKEN_SUCCESS',
+    user,
   };
 };
 
@@ -24,10 +25,11 @@ export function loginRequest(userData) {
   };
 };
 
-export function authSuccess(token) {
+export function authSuccess(token, user) {
   return {
     type: '@auth/SUCCESS',
     token,
+    user,
   };
 };
 

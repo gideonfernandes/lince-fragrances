@@ -12,7 +12,7 @@ export const LoadContainer = styled.div`
 
 export const Container = styled.div`
   padding: 30px;
-  margin: -2rem calc((100% - 960px) / 2) 0 calc((100% - 960px) / 2);
+  margin: -2rem calc((100% - 960px) / 2) 4rem calc((100% - 960px) / 2);
   background: #FFF;
   border-radius: 4px;
 

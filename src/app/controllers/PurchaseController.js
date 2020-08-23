@@ -43,13 +43,23 @@ class PurchaseController {
       user_id, order, total
     } = request.body;
 
-    const purchase = await Purchase.create({
+    await Purchase.create({
       user_id,
       order,
       total,
     });
 
-    return response.json(purchase);
+    const buyer = await User.findOne({
+      where: { id: user_id },
+      attributes: ['id', 'name', 'last_name'],
+    });
+
+    return response.json({
+      user_id,
+      order,
+      total,
+      buyer,
+    });
   }
 }
 

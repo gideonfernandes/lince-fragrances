@@ -25,6 +25,9 @@ function cart(state = [], action) {
           draft[productIndex].amount = Number(action.amount);
         };
       });
+    
+    case '@cart/RESET':
+      return state;
     default:
       return state;
   };

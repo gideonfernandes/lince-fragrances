@@ -21,7 +21,9 @@ const Register = ({ loadTokenRequest, history, isAuthenticated, registerRequest 
 
   useEffect(() => {
     if (localStorage.token && localStorage.token !== undefined) {
-      loadTokenRequest();
+      if (localStorage.authenticateUserId !== undefined) {
+        loadTokenRequest();
+      };
     };
   // eslint-disable-next-line
   }, []);
