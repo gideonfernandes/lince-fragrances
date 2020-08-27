@@ -20,11 +20,10 @@ class PurchaseController {
     });
 
     return response.json(purchases);
-  }
+  };
 
   async store(request, response) {
     const schema = Yup.object().shape({
-      user_id: Yup.number().required(),
       total: Yup.number().required(),
       order: Yup.string().required(),
       order: Yup.array().of(
@@ -38,9 +37,22 @@ class PurchaseController {
 
     if (!(await schema.isValid(request.body))) {
       return response.status(400).json({ error: 'Validation fails.' });
-    }
+    };
+
+    const { user_id } = request.params;
+
+    const buyer = await User.findOne({
+      where: { id: user_id },
+      attributes: ['id', 'name', 'last_name'],
+    });
+
+    if (!buyer) {
+      return response.status(400)
+        .json({ error: 'Only valid users can do this.' });
+    };
+
     const {
-      user_id, order, total
+      order, total
     } = request.body;
 
     await Purchase.create({
@@ -49,18 +61,12 @@ class PurchaseController {
       total,
     });
 
-    const buyer = await User.findOne({
-      where: { id: user_id },
-      attributes: ['id', 'name', 'last_name'],
-    });
-
     return response.json({
-      user_id,
       order,
       total,
       buyer,
     });
-  }
-}
+  };
+};
 
 module.exports = new PurchaseController();
