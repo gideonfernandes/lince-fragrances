@@ -1,10 +1,10 @@
 # Como instalar?
 
-Para podermos rodar esta aplicação em sua máquina é necessário a instalação de 2 softwares, sendo eles o Git que usaremos para receber os dados e arquivos do projeto e o Node.js que tona possível a execução da aplicação, uma vez que queremos executar em nossa própria máquina sem depender de nenhum servidor de execução externo.
+Para podermos rodar esta aplicação em sua máquina é necessário a instalação de 2 softwares, sendo eles o Git que usaremos para receber os dados e arquivos do projeto e o Node.js que torna possível a execução da aplicação, uma vez que queremos executar em nossa própria máquina sem depender de nenhum servidor de execução externo.
 
 ### Instalando o Git
 
-Como se trata de uma ferramenta gratuita e multiplataforma, basta fazer o download da versão mais adequada para seu sistema operacional no [link](https://git-scm.com) e depois de baixar, clique duas  ezes no arquivo para iniciar o assistente de instalação e seguir as instruções na tela, clicando em "next", "next"... Ao término, clique em "finish" para concluir com êxito a instalação.
+Como se trata de uma ferramenta gratuita e multiplataforma, basta fazer o download da versão mais adequada para seu sistema operacional no [link](https://git-scm.com) e depois de baixar, clique duas vezes no arquivo para iniciar o assistente de instalação e seguir as instruções na tela, clicando em "next", "next"... Ao término, clique em "finish" para concluir com êxito a instalação.
 
 ### Instalando o Node.js
 
@@ -12,7 +12,7 @@ Após finalizar a instalação do Git, partimos para instalação do Node.js ace
 
 ### Acessando o prompt de comando
 
-Com as duas instalações finalizadas, devemos abrir o prompt de comando onde executaremos os comandos de instalação. Pressione as teclas "Windows" + "X" para abrir o menu usuário avançado, e clique em "Prompt de comando" ou "Prompt de comando (Admin)".
+Com as duas instalações finalizadas, devemos abrir o prompt de comando onde executaremos os comandos de instalação. Pressione as teclas "Windows" + "X" para abrir o menu usuário avançado, e clique em "Prompt de comando" ou "Prompt de comando (Admin) também é provável nas novas versões do windows você encontrar "Windows PowerShell (Admin)" opte por esta opção caso possível.
 
 ### Instalando dependências
 
